@@ -41,3 +41,29 @@ def get_nutritions_endpoint(db: Session = Depends(get_db)):
 @app.get("/nutritions/date/{date}", response_model=List[Nutrition])
 def get_nutrition_by_date_endpoint(date: datetime, db: Session = Depends(get_db)):
     return get_nutrition_by_date(db, date)
+
+
+'''
+# Predict endpoint
+riq => image & res => nutritions & descriptions
+
+1. Menerima request image
+2. Menjalankan model prediksi nutrisi
+3. Mendapatkan hasil prediksi nutrisi
+4. Menyimpan image di server
+5. Mengirim image dan hasil prediksi ke llm
+6. Memperoleh judul deskripsi dari llm
+7. Memperoleh isi deskripsii dari llm
+8. Mengembalikan data nutrisi, deskripsi, dan nama image.
+'''
+
+
+'''
+# Delete image prediction endpoint
+req => image
+
+1. Mengklik hapus
+2. Menerima nama image yang akan dihapus
+3. Menghapus image di server
+4. Mengembalikan status ok
+'''
