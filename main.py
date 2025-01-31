@@ -1,10 +1,18 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, UploadFile, File, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.crud import create_user, get_users, create_nutrition, get_nutritions, get_nutrition_by_date
 from app.schemas import UserCreate, NutritionCreate, User, Nutrition
 from datetime import datetime
 from typing import List
+from pathlib import Path
+import shutil
+import uuid
+
+# Direktori penyimpanan gambar
+IMAGE_DIR = Path("data/images")
+IMAGE_DIR.mkdir(parents=True, exist_ok=True)    # Buat folder jika belum ada
+
 
 app = FastAPI()
 
@@ -55,8 +63,27 @@ riq => image & res => nutritions & descriptions
 6. Memperoleh judul deskripsi dari llm
 7. Memperoleh isi deskripsii dari llm
 8. Mengembalikan data nutrisi, deskripsi, dan nama image.
-'''
 
+# Try curl -X 'POST' 'http://127.0.0.1:8000/predict' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'file=@./bojobaru.png'
+'''
+@app.post("/predict")
+async def upload_image(file: UploadFile = File(...)):
+    # Pastikan hanya menerima file gambar
+    if file.content_type not in ["image/jpeg", "image/png"]:
+        raise HTTPException(status_code=400, detail="File harus berupa gambar (JPEG/PNG)")
+
+    # Buat nama file acak menggunakan UUID
+    file_extension = file.filename.split(".")[-1]
+    random_filename = f"{uuid.uuid4()}.{file_extension}"
+
+    # Path penyimpanan
+    file_path = IMAGE_DIR / random_filename
+
+    # Simpan gambar
+    with file_path.open("wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    return {"filename": random_filename, "message": "File uploaded successfully"}
 
 '''
 # Delete image prediction endpoint
