@@ -16,6 +16,10 @@ def get_db():
     finally:
         db.close()
 
+@app.get("/")
+def welcome():
+    return {"message": "BundaCare API is running!"}
+
 # Endpoint User
 @app.post("/users/", response_model=User)
 def create_user_endpoint(user: UserCreate, db: Session = Depends(get_db)):
