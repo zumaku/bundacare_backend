@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, Text, ForeignKey, DateTime, TIMESTAMP
 from sqlalchemy.orm import relationship
 from app.database import Base
 
@@ -26,6 +27,6 @@ class Nutrition(Base):
     judul_deskripsi = Column(String, nullable=False)
     isi_deskripsi = Column(Text, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    created_at = Column(DateTime, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False, default=datetime.utcnow)
 
     user = relationship("User", back_populates="nutritions")
