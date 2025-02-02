@@ -82,8 +82,36 @@ async def upload_image(file: UploadFile = File(...)):
     # Simpan gambar
     with file_path.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-
-    return {"filename": random_filename, "message": "File uploaded successfully"}
+        
+    '''
+    # Jalankan fungsi prediksi
+    Fungsi tersebut untuk mendapatkan nilai kalori, protein, karbo, dan lemak
+    '''
+    kalori = 40
+    protein = 4
+    karbo = 15
+    lemak = 5
+    
+    '''
+    # Jalankan fungsi get prediksi
+    Fungsi ini akan melempar data nutrisi yang didapat ke Gemini
+    untuk mendapatkan nilai judul deskripsi dan isi deskripsinya.
+    '''
+    judul_deskripsi = 'Tumis Brokoli dan Wortel'
+    isi_deskripsi = 'Brokoli kaya akan vitamin C dan zat besi, sedangkan wortel memberikan vitamin A. Makanan ini rendah kalori dan lemak.'
+    
+    # Mempersiapkan data yang didapat
+    data = {
+        "kalori": kalori,
+        "protein": protein,
+        "karbo": karbo,
+        'lemak': lemak,
+        'judul_deskripsi': judul_deskripsi,
+        'isi_deskripsi': isi_deskripsi
+    }
+    
+    # Mengembalikan data ke client
+    return {"nama_gambar": random_filename, "data": data}
 
 '''
 # Delete image prediction endpoint
