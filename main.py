@@ -122,3 +122,17 @@ req => image
 3. Menghapus image di server
 4. Mengembalikan status ok
 '''
+@app.delete("/predict/{filename}")
+async def delete_image(filename: str):
+    file_path = IMAGE_DIR / filename
+    
+    # Cek apakah file ada
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    try:
+        file_path.unlink()  # Hapus file
+        return {"message": f"File '{filename}' deleted successfully"}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete file: {str(e)}")
