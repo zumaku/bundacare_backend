@@ -329,7 +329,3 @@ File untuk menyimpan konfigurasi environment seperti database URL, secret key, d
   "message": "File '36f95155-f404-4434-b2e7-87fee090dbbc.png' deleted successfully"
 }
 ```
-
-
-## 📖 Pendahuluan
-Proyek ini adalah backend FastAPI untuk manajemen nutrisi.
