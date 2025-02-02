@@ -1,0 +1,225 @@
+{
+    "info": {
+        "_postman_id": "c9bea023-6a62-4472-a88d-af3ff590b839",
+        "name": "bundacare",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Welcome",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:8000",
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                }
+            }
+        },
+        {
+            "name": "Get All Users",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/users",
+                    "path": [
+                        "users"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Get All Nutritions",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/nutritions",
+                    "path": [
+                        "nutritions"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                }
+            }
+        },
+        {
+            "name": "Get Spesific Date",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8000/nutritions/date/2025-01-30",
+                    "path": [
+                        "nutritions",
+                        "date",
+                        "2025-01-30"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Create User",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/users",
+                    "path": [
+                        "users"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n    \"username\": \"hua\",\n    \"nik\": \"1234\",\n    \"password\": \"admin\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Create Nutritions",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/nutritions",
+                    "path": [
+                        "nutritions"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\r\n  \"nama_makanan\": \"Nasi Kuning\",\r\n  \"gambar\": \"nasi_kuning.jpg\",\r\n  \"kalori\": 350,\r\n  \"protein\": 16,\r\n  \"karbo\": 40,\r\n  \"lemak\": 13,\r\n  \"judul_deskripsi\": \"Makanan favorit\",\r\n  \"isi_deskripsi\": \"Nasi kuning adalah makanan enak.\",\r\n  \"user_id\": 1\r\n}\r\n"
+                }
+            }
+        },
+        {
+            "name": "Predict Image",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/predict",
+                    "path": [
+                        "predict"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "",
+                            "src": "c:\\Users\\ASUS\\Saved Games\\Downloads\\zjN7W3mhXjZNtCFZb4Y1PAfOK_adVx5lXhKNC7vLYcg=.png",
+                            "type": "file"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Delete Image Predict",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "http://127.0.0.1:8000/predict/36f95155-f404-4434-b2e7-87fee090dbbc.png",
+                    "path": [
+                        "predict",
+                        "36f95155-f404-4434-b2e7-87fee090dbbc.png"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "127",
+                        "0",
+                        "0",
+                        "1"
+                    ],
+                    "port": "8000"
+                }
+            }
+        }
+    ]
+}

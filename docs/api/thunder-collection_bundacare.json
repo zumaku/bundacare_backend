@@ -1,0 +1,153 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "bundacare",
+    "collectionId": "491db5e6-40de-4353-b80f-beed90e04877",
+    "dateExported": "2025-02-02T09:47:38.146Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "be0ca512-d302-4d3a-8d96-235e48670a31",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Welcome",
+            "url": "http://127.0.0.1:8000",
+            "method": "GET",
+            "sortNum": 5000,
+            "created": "2025-01-31T03:38:52.166Z",
+            "modified": "2025-01-31T03:38:52.166Z",
+            "headers": []
+        },
+        {
+            "_id": "3cda47b5-f59c-49ce-8046-25c1f46ee901",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Get All Users",
+            "url": "http://127.0.0.1:8000/users",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2025-01-25T10:35:57.367Z",
+            "modified": "2025-01-25T10:39:27.372Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ]
+        },
+        {
+            "_id": "f81ce297-e36e-4b69-9e90-97325b8a9cdc",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Get All Nutritions",
+            "url": "http://127.0.0.1:8000/nutritions",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2025-01-25T10:36:39.921Z",
+            "modified": "2025-01-25T10:36:39.921Z",
+            "headers": []
+        },
+        {
+            "_id": "4a514483-7015-452c-b47c-d67c43c9f116",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Get Spesific Date",
+            "url": "http://localhost:8000/nutritions/date/2025-01-30",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2025-01-25T14:16:15.863Z",
+            "modified": "2025-01-30T12:55:07.703Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ]
+        },
+        {
+            "_id": "df3e1bd1-7f56-4263-a170-6c9e65d9900c",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Create User",
+            "url": "http://127.0.0.1:8000/users",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2025-01-25T10:38:08.385Z",
+            "modified": "2025-02-02T09:20:44.509Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"username\": \"hua\",\n    \"nik\": \"1234\",\n    \"password\": \"admin\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c8d25f7f-7533-471f-844a-a8d06ffe7c58",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Create Nutritions",
+            "url": "http://127.0.0.1:8000/nutritions",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2025-01-25T10:39:03.379Z",
+            "modified": "2025-02-02T09:35:46.175Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n  \"nama_makanan\": \"Nasi Kuning\",\r\n  \"gambar\": \"nasi_kuning.jpg\",\r\n  \"kalori\": 350,\r\n  \"protein\": 16,\r\n  \"karbo\": 40,\r\n  \"lemak\": 13,\r\n  \"judul_deskripsi\": \"Makanan favorit\",\r\n  \"isi_deskripsi\": \"Nasi kuning adalah makanan enak.\",\r\n  \"user_id\": 1\r\n}\r\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "b8e7ad49-78c9-4ad9-9cec-53a2c16f5fdb",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Predict Image",
+            "url": "http://127.0.0.1:8000/predict",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2025-02-02T09:18:33.432Z",
+            "modified": "2025-02-02T09:18:33.432Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                }
+            ],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "",
+                        "value": "c:\\Users\\ASUS\\Saved Games\\Downloads\\zjN7W3mhXjZNtCFZb4Y1PAfOK_adVx5lXhKNC7vLYcg=.png"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "49a1e55e-532a-4089-878c-3e1a7e044e21",
+            "colId": "491db5e6-40de-4353-b80f-beed90e04877",
+            "containerId": "",
+            "name": "Delete Image Predict",
+            "url": "http://127.0.0.1:8000/predict/36f95155-f404-4434-b2e7-87fee090dbbc.png",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2025-02-02T09:20:00.517Z",
+            "modified": "2025-02-02T09:23:56.224Z",
+            "headers": []
+        }
+    ],
+    "ref": "r4jhoS8jBwOH18qsOn3mJ22Ubv8Bc12T7iRlk1J6s-e7XapHeAR9tYPLkx4dvEKbDIiWrKLYy9Tz9FA438abNA"
+}
