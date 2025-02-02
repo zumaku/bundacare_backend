@@ -1,9 +1,115 @@
+
+
 # **API Documentation: BundaCare**
 
-## **Base URL**  
-`http://127.0.0.1:8000`
+> ## **📌 List Konten**
+> - [**📄 Deskripsi Proyek**](#📄-deskripsi-proyek)
+> - [**📂 Struktur Folder**](#📂-struktur-folder)
+> - [**▶️ Cara Menggunakan**](#▶️-cara-menggunakan)
+> - [**🎯 Endpoints**](#🎯-endpoints)
+> 
 
-## **Endpoints**
+## **📄 Deskripsi Proyek**
+BundaCare adalah aplikasi backend berbasis FastAPI untuk manajemen nutrisi harian ibu hamil yang memiliki fitur prediksi nutrisi makanan harian, chatbot intteraktif, dan monitoring tenaga kesehatan secara real time.
+
+Pengembang:
+- Zul Fadli Ahmad
+- Nursyamsu Rijal Usman
+- Isla Inayah Bahar
+
+## **📂 Struktur Folder**
+Berikut adalah struktur direktori dalam proyek ini:
+
+```
+.
+├── .venv/                  # Virtual environment (opsional)
+├── app/
+│   ├-─ crud.py            # Operasi CRUD untuk database
+│   ├── database.py        # Konfigurasi database
+│   ├── models.py          # Model database dengan SQLAlchemy
+│   ├── schemas.py         # Skema Pydantic untuk validasi data
+│
+├── data/
+│   ├── images/            # Folder untuk menyimpan gambar
+│   ├── backup_file.dump   # File backup database
+│   ├── backup.sql         # SQL dump untuk restore database
+│   ├── how_to_export_data.md  # Panduan ekspor data
+│
+├── docs/
+│   ├── api/               # Dokumentasi API
+│   │   ├── thunder-collection_bundacare.json
+│   │   ├── thunder-collection_postman_bundacare.json
+│
+├── .env                   # File konfigurasi environment
+├── .env.example           # Template konfigurasi environment
+├── .gitignore             # File untuk mengabaikan file tertentu dalam Git
+├── bojobaru.png           # Gambar tes sementara
+├── main.py                # Entry point aplikasi FastAPI
+├── README.md              # Dokumentasi utama proyek
+├── requirements.txt       # Daftar dependensi Python
+├── TODO.md                # Daftar tugas dan rencana pengembangan
+```
+
+### **1. `app/`**
+Berisi kode utama backend:
+- `crud.py`: Berisi fungsi CRUD untuk database.
+- `database.py`: Mengatur koneksi database menggunakan SQLAlchemy.
+- `models.py`: Definisi model database.
+- `schemas.py`: Validasi data menggunakan Pydantic.
+
+### **2. `data/`**
+Folder untuk penyimpanan data tambahan:
+- `images/`: Direktori penyimpanan gambar.
+- `backup.sql`: File untuk backup dan restore database.
+- `how_to_export_data.md`: Panduan ekspor data.
+
+### **3. `docs/`**
+Folder yang berisi dokumentasi API:
+- `api/`: Koleksi API untuk Postman dan Thunderclient dalam format JSON.
+
+### **4. `main.py`**
+File utama untuk menjalankan aplikasi FastAPI.
+
+### **5. `requirements.txt`**
+File yang berisi daftar dependensi yang perlu diinstal dengan `pip install -r requirements.txt`.
+
+### **6. `.env & .env.example`**
+File untuk menyimpan konfigurasi environment seperti database URL, secret key, dll.
+
+## **▶️ Cara Menggunakan**
+1. Sebelum menjalankan FastAPI, pastikan Anda telah menginstal:
+    - Python (>= 3.8)
+    - pip (Python package manager)
+    - Virtual environment (opsional, tetapi disarankan)
+2. Buat virtual environment dan aktifkan:
+   ```sh
+   python -m venv venv
+   source venv/bin/activate  # Untuk macOS/Linux
+   venv\Scripts\activate     # Untuk Windows
+   ```
+3. Instal dependensi:
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. Buat file `.env`:
+   ```sh
+   cp .env.example .env
+   # Isikan dipendensi environment yang dibutuhkan di file `.env`
+   ```
+5. Jalankan aplikasi FastAPI:
+   ```sh
+   python3 uvicorn main:app --reload    # Untuk macOS/Linux
+   python uvicorn main:app --reload     # Untuk Windows
+   ```
+6. Akses API di browser:
+   - Base URL: `http://127.0.0.1:8000`
+   - Swagger UI: `http://127.0.0.1:8000/docs`
+   - Redoc: `http://127.0.0.1:8000/redoc`
+
+
+## **🎯 Endpoints**
+
+**Base URL** `http://127.0.0.1:8000`
 
 ### **0. Welcome**
 - **URL** `/`
@@ -223,3 +329,7 @@
   "message": "File '36f95155-f404-4434-b2e7-87fee090dbbc.png' deleted successfully"
 }
 ```
+
+
+## 📖 Pendahuluan
+Proyek ini adalah backend FastAPI untuk manajemen nutrisi.
