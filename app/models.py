@@ -10,7 +10,7 @@ class User(Base):
     username = Column(String, unique=True, nullable=False)
     nik = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
-    created_at = Column(DateTime, nullable=False)
+    created_at = Column(TIMESTAMP, nullable=False, default=datetime.utcnow)
 
     nutritions = relationship("Nutrition", back_populates="user")
 
