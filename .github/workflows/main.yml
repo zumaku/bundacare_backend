@@ -34,7 +34,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.USER }}
+          username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
@@ -42,4 +42,4 @@ jobs:
             docker stop bcare || true
             docker rm bcare || true
             docker run -d --name bcare -p 80:80 ijull/bcare:latest
-      
+
