@@ -32,8 +32,10 @@ jobs:
 
       - name: Set up SSH key
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/private_key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tr -d '\r' > /tmp/private_key
           chmod 600 /tmp/private_key
+          eval $(ssh-agent -s)
+          ssh-add /tmp/private_key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     
