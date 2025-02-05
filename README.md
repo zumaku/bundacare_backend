@@ -24,30 +24,38 @@ Berikut adalah struktur direktori dalam proyek ini:
 .
 ├── .venv/                  # Virtual environment (opsional)
 ├── app/
-│   ├-─ crud.py            # Operasi CRUD untuk database
-│   ├── database.py        # Konfigurasi database
+│   ├── routers/           # Folder untuk endpoint (API routes)
+│   |   ├── home.py        # Endpoint untuk root API
+│   |   ├── nutrition.py   # Endpoint untuk nutrisi
+│   |   ├── predict.py     # Endpoint untuk prediksi gambar
+│   |   └── user.py        # Endpoint untuk user
+|   |
+│   ├── crud.py            # Operasi CRUD untuk database
+│   ├── database.py        # Konfigurasi database (SQLAlchemy)
+│   ├── gcs.py             # Interaksi dengan Google Cloud Storage (jika ada)
 │   ├── models.py          # Model database dengan SQLAlchemy
-│   ├── schemas.py         # Skema Pydantic untuk validasi data
+│   └── schemas.py         # Skema Pydantic untuk validasi data
 │
+├── config/
+│   └── gsc-key.json       # Berisi konfigurasi Google Cloud Storage
+|
 ├── data/
 │   ├── images/            # Folder untuk menyimpan gambar
 │   ├── backup_file.dump   # File backup database
 │   ├── backup.sql         # SQL dump untuk restore database
-│   ├── how_to_export_data.md  # Panduan ekspor data
+│   └── how_to_export_data.md  # Panduan ekspor data
 │
 ├── docs/
-│   ├── api/               # Dokumentasi API
-│   │   ├── thunder-collection_bundacare.json
-│   │   ├── thunder-collection_postman_bundacare.json
+│   └── api/               # Dokumentasi API
+│       ├── thunder-collection_bundacare.json # Koleksi Thunder Client/Postman
+│       └── thunder-collection_postman_bundacare.json
 │
 ├── .env                   # File konfigurasi environment
 ├── .env.example           # Template konfigurasi environment
 ├── .gitignore             # File untuk mengabaikan file tertentu dalam Git
-├── bojobaru.png           # Gambar tes sementara
 ├── main.py                # Entry point aplikasi FastAPI
 ├── README.md              # Dokumentasi utama proyek
-├── requirements.txt       # Daftar dependensi Python
-├── TODO.md                # Daftar tugas dan rencana pengembangan
+└── requirements.txt       # Daftar dependensi Python
 ```
 
 ### **1. `app/`**
@@ -57,23 +65,27 @@ Berisi kode utama backend:
 - `models.py`: Definisi model database.
 - `schemas.py`: Validasi data menggunakan Pydantic.
 
-### **2. `data/`**
+### **2. `config/`**
+Folder untuk penyimpanan file konfigurasi:
+- `gcs-key.json`: File konfigurasi Google Cloud Storage.
+
+### **3. `data/`**
 Folder untuk penyimpanan data tambahan:
 - `images/`: Direktori penyimpanan gambar.
 - `backup.sql`: File untuk backup dan restore database.
 - `how_to_export_data.md`: Panduan ekspor data.
 
-### **3. `docs/`**
+### **4. `docs/`**
 Folder yang berisi dokumentasi API:
 - `api/`: Koleksi API untuk Postman dan Thunderclient dalam format JSON.
 
-### **4. `main.py`**
+### **5. `main.py`**
 File utama untuk menjalankan aplikasi FastAPI.
 
-### **5. `requirements.txt`**
+### **6. `requirements.txt`**
 File yang berisi daftar dependensi yang perlu diinstal dengan `pip install -r requirements.txt`.
 
-### **6. `.env & .env.example`**
+### **7. `.env & .env.example`**
 File untuk menyimpan konfigurasi environment seperti database URL, secret key, dll.
 
 ## **▶️ Cara Menggunakan**
@@ -299,17 +311,24 @@ File untuk menyimpan konfigurasi environment seperti database URL, secret key, d
 - **Body:**  
   - File gambar yang akan diprediksi.
 
+##### **cURL Example**
+```sh
+curl -X 'POST' 'http://127.0.0.1:8000/predict' \
+-H 'accept: application/json' \
+-H 'Content-Type: multipart/form-data' \
+-F 'file=@data/image/img_example.png'
+```
+
 ##### **Response**  
 ```json
 {
-  "nama_gambar":"1c2d0a6a-f753-42ca-beb0-5a49c5a6cca6.png",
+  "gambar_url":"https://storage.googleapis.com/bundacare_docs/e1e8721b-7bcb-4411-950b-4a4aac2803cb.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=bundacare-storage-service%40sparkdatathon-2025-student-7.iam.gserviceaccount.com%2F20250205%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20250205T144740Z&X-Goog-Expires=3600&X-Goog-SignedHeaders=host&X-Goog-Signature=a9d6d8c5bd8a9810abe7d4742ae548c586570e226a620e6f843ce6c32c99d67bb8fbb302cca31374e0b7899eb5f92e20e94300fc15bb706d74c170c7b401068dc60d3e2427e2bef849c62fc35e9b1d7d0f470b5ee33e7fd39d1b7ada5e2e1d4e1cdae7d9c80e5fee028849470a752dc34fd3bb7c48a1a3a906a6e00699f7cc29886979e371c8c2129eba8c9c493c816bc4b462b832ff85641ec13e66d0e8be52d8add0809d02a39c176ca77cecc4836c6362ac8353ad5cd9efc2f5b68b694c570888fe407fff93fd0d5872413d6f2ee92b4badabd99354a64e108764352fc0dff9427a44d88e9ba093faad3aaaf4bc4fad7dfe3a3672ad05886fa9a507db493a",
   "data":{
     "kalori":40,
     "protein":4,
     "karbo":15,
     "lemak":5,
-    "judul_deskripsi":"Tumis Brokoli dan Wortel",
-    "isi_deskripsi":"Brokoli kaya akan vitamin C dan zat besi, sedangkan wortel memberikan vitamin A. Makanan ini rendah kalori dan lemak."
+    "judul_deskripsi":"Tumis Brokoli dan Wortel","isi_deskripsi":"Brokoli kaya akan vitamin C dan zat besi, sedangkan wortel memberikan vitamin A."
   }
 }
 ```
@@ -317,11 +336,17 @@ File untuk menyimpan konfigurasi environment seperti database URL, secret key, d
 ---
 
 #### **3.2. Delete Prediction Image**  
-- **URL:** `/predict/{image_id}`  
+- **URL:** `/predict/{filename}`  
 - **Method:** `DELETE`  
 - **Description:** Menghapus gambar hasil prediksi.
 - **Example:**  
-  - `/predict/36f95155-f404-4434-b2e7-87fee090dbbc.png`
+  - Jika `gambar_url` yang didapat dari response server: `https://storage.googleapis.com/bundacare_docs/e1e8721b-7bcb-4411-950b-4a4aac2803cb.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=...&X-Goog-Date=...&X-Goog-Expires=...&X-Goog-SignedHeaders=host&X-Goog-Signature=...`
+  - Maka gunakan nama filenya untuk menghapus: `/predict/e1e8721b-7bcb-4411-950b-4a4aac2803cb.png`
+
+##### **cURL Example**
+```sh
+curl -X 'DELETE' 'http://127.0.0.1:8000/predict/e1e8721b-7bcb-4411-950b-4a4aac2803cb.png'
+```
 
 ##### **Response**  
 ```json

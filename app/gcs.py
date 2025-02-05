@@ -38,4 +38,4 @@ def delete_from_gcs(filename):
     """Menghapus file dari Google Cloud Storage."""
     blob = bucket.blob(filename)
     blob.delete()
-    return {"message": f"File '{filename}' dihapus dari GCS"}
+    return {"message": f"File '{filename}' deleted successfully"}
